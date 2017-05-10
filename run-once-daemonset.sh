@@ -34,6 +34,8 @@ function wait_for_cats() {
       sleep 1
       echo -n "."
     done
+    
+    # at this point you could take the output of kubectl logs and do something with it
   done
 
   echo
