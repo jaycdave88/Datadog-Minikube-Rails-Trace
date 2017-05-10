@@ -15,6 +15,7 @@ spec:
         volumeMounts:
         - name: etc-hosts
           mountPath: /node/etc/hosts
+          readOnly: true
       volumes:
       - name: etc-hosts
         hostPath:
