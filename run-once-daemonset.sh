@@ -3,42 +3,15 @@
 set -euo pipefail
 
 function main() {
-  kubectl apply -f daemonset.yaml
-  wait_for_pods cat-etc-hosts
-  wait_for_cats cat-etc-hosts
-  kubectl delete -f daemonset.yaml
+  kubectl apply -f datadog-agent.yaml
+  apply_api_key
 }
 
-function wait_for_pods() {
-  echo -n "waiting for $1 pods to run"
+function apply_api_key() {
+  echo -n "applying Datadog API Key"
 
-  PODS=$(kubectl get pods | grep $1 | awk '{print $1}')
-
-  for POD in ${PODS}; do
-    while [[ $(kubectl get pod ${POD} -o go-template --template "{{.status.phase}}") != "Running" ]]; do
-      sleep 1
-      echo -n "."
-    done
-  done
+  DD_API_KEY={API_KEY} docker-compose up
 
   echo
 }
-
-function wait_for_cats() {
-  echo -n "waiting for $1 daemonset to complete"
-
-  PODS=$(kubectl get pods | grep $1 | awk '{print $1}')
-
-  for POD in ${PODS}; do
-    while [[ $(kubectl logs ${POD} --tail 1) != "done" ]]; do
-      sleep 1
-      echo -n "."
-    done
-    
-    # at this point you could take the output of kubectl logs and do something with it
-  done
-
-  echo
-}
-
 main

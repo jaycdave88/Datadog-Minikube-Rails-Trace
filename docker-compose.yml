@@ -1,0 +1,30 @@
+version: '3.2'
+services:
+  mysql:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_PASSWORD=123456
+      - MYSQL_USER=test
+  redis:
+    image: redis:4.0
+  datadog:
+    image: datadog/agent
+    environment:
+      - DD_APM_ENABLED=true
+      - DD_BIND_HOST=0.0.0.0
+      - DD_API_KEY
+  web:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+      - redis
+      - datadog
+    environment:
+      - PROTECTED_USER=me
+      - PROTECTED_PASSWORD=123456

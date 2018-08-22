@@ -1,7 +1,17 @@
-FROM alpine:3.5
+FROM ruby:2.5.1
 
-COPY cat-etc-hosts.sh .
+# install build-tools
+RUN apt-get update -qq \
+  && apt-get install -y \
+       build-essential \
+       libpq-dev \
+       nodejs
 
-RUN chmod u+x cat-etc-hosts.sh
+# install application dependencies
+RUN mkdir /app
+WORKDIR /app
+ADD Gemfile /app
+ADD Gemfile.lock /app
+RUN bundle install
 
-CMD ["./cat-etc-hosts.sh"]
+CMD ["bundle", "exec", "unicorn", "-c", "config/unicorn.rb", "-l", "3000"]
