@@ -7,24 +7,45 @@ Installing Docker: https://pilsniak.com/how-to-install-docker-on-mac-os-using-br
 
 ### Install Datadog Agent and Trace Agent on MacOS:
 Install the Datadog Agent:
+
 https://app.datadoghq.com/account/settings#agent/mac
+
 Open a browser and navigate to:  http://127.0.0.1:5002/
+
 This is the Datadog Agent UI 
+
 Under the “Settings” option add the following-line:
+
 `apm_config: 
    enabled: true`
+
 More info can be found here: https://docs.datadoghq.com/tracing/setup/
+
 Next navigate to: https://github.com/DataDog/datadog-trace-agent
-The reason you are navigating here is because the Mac OS X Agent does not have the Trace Agent part of it. So you need to install the separately.
+
+The reason you are navigating here is because the Mac OS X Agent 
+does not have the Trace Agent part of it. So you need to install the separately.
+
 Download this: https://github.com/DataDog/datadog-trace-agent/releases/download/6.4.1/trace-agent-darwin-amd64-6.4.1
+
 Move the downloaded file to a folder or directory then
+
 Open terminal 
+
 `Run ps -ef | grep agent`
+
 This will show all the agent process that are running in the background
-Navigate in Terminal to the folder that the: trace-agent-darwin-amd64-6.4.1
-Then run the following command to start the trace-agent: `sudo ./trace-agent-darwin-amd64-6.4.1 -config /opt/datadog-agent/etc/datadog.yaml`
+
+Navigate in Terminal to the folder that the: 
+
+trace-agent-darwin-amd64-6.4.1
+
+Then run the following command to start the trace-agent: 
+
+`sudo ./trace-agent-darwin-amd64-6.4.1 -config /opt/datadog-agent/etc/datadog.yaml`
 
 If you run into an issue that says you can not run start the trace agent: 
+
 Run the following command in Terminal
 `chmod 777 trace-agent-darwin-amd64-6.4.1`
 
