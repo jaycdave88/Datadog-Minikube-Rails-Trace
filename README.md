@@ -5,7 +5,7 @@ Installing minikube locally: https://github.com/kubernetes/minikube
 
 Installing Vagrant: http://sourabhbajaj.com/mac-setup/Vagrant/README.html
 
-Installing Docker: https://pilsniak.com/how-to-install-docker-on-mac-os-using-brew/
+Installing Docker: https://download.docker.com/mac/stable/Docker.dmg
 
 # Run minikube machine: 
 Start command: `minikube start`
