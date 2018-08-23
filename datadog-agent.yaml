@@ -22,7 +22,7 @@ spec:
             protocol: TCP
         env:
           - name: DD_API_KEY
-            value: ed1335a1fc3676cc883c2f8b55cbf93c
+            value: API_KEY
           - name: KUBERNETES
             value: "yes"
           - name: DD_APM_ENABLED
